@@ -14,15 +14,15 @@ int main()
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
     {
-        cout << "WSADATA 생성에 실패했습니다" << endl;
+        cout << "WSADATA create failed" << endl;
         return 1;
     }
 
     // 2. 리스닝 소켓 생성
     SOCKET listeningSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (listeningSock = INVALID_SOCKET)
+    if (listeningSock == INVALID_SOCKET)
     {
-        cout << "listening socket을 생성할 수 없습니다." << endl;
+        cout << "listening socket create failed" << endl;
         return 1;
     }
 
@@ -44,7 +44,7 @@ int main()
 
     if (client_socket == INVALID_SOCKET)
     {
-        cout << "클라이언트 연결 실패" << endl;
+        cout << "client connection failed" << endl;
     }
 
     // 6. 데이터 수신
@@ -54,6 +54,13 @@ int main()
     if (recievedMessage > 0)
     {
         buffer[recievedMessage] = '\0'; // 문자열 끝 처리
-        cout << "클라이언트로부터 받은 데이터: " << buffer << endl;
+        cout << "recieved message from client: " << buffer << endl;
     }
+
+    // 7. 소켓 종료
+    closesocket(client_socket);
+    closesocket(listeningSock);
+
+    WSACleanup();
+    return 0;
 }
