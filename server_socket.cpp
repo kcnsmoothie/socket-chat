@@ -22,4 +22,14 @@ int main(){
         cout << "listening socket을 생성할 수 없습니다." << endl;
         return 1;
     }
+
+    // 3. IP 주소, PORT 번호 바인딩
+    sockaddr_in addrServer {};
+    addrServer.sin_family = AF_INET;
+    addrServer.sin_port = htons(4882); // port 번호
+    addrServer.sin_addr.s_addr = htonl(INADDR_ANY); 
+
+    bind(listeningSock, (SOCKADDR*)&addrServer, sizeof(addrServer));
+    listen(listeningSock,SOMAXCONN); // 4. 클라이언트 요청 리스닝
+
 }
