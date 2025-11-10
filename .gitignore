@@ -1,0 +1,10 @@
+# Ignore VS Code workspace settings (개인 환경 설정은 추적하지 않음)
+.vscode/*
+
+# (선택) VS Code 로컬 히스토리 무시
+.history/
+
+# Windows 불필요한 파일 무시
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
