@@ -41,3 +41,19 @@ int main()
 
     SOCKET client_socket;
     client_socket = accept(listeningSock, (SOCKADDR *)&client, &client_size);
+
+    if (client_socket == INVALID_SOCKET)
+    {
+        cout << "클라이언트 연결 실패" << endl;
+    }
+
+    // 6. 데이터 수신
+    char buffer[1024] = {0};
+    int recievedMessage = recv(client_socket, buffer, sizeof(buffer) - 1, 0);
+
+    if (recievedMessage > 0)
+    {
+        buffer[recievedMessage] = '\0'; // 문자열 끝 처리
+        cout << "클라이언트로부터 받은 데이터: " << buffer << endl;
+    }
+}
